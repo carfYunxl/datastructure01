@@ -1,11 +1,14 @@
-#include <QCoreApplication>
+﻿#include <QCoreApplication>
 #include "list.h"
 #include "stack.h"
 #include "mat.h"
 #include <iostream>
 #include <windows.h>
 #include "tree.h"
-
+#include "bithrtree.h"
+#include "hftree.h"
+#include <QVector>
+#include <algorithm>
 void testFunc_1();
 void testFunc_2();
 void testFunc_3();
@@ -17,7 +20,30 @@ void Mtest();
 void sin_Integration(double t);
 void controlPlatform();
 void treeTest();
+void testBiThrTree()
+{
+    biThrTree s;
+    biThrNode *p = nullptr;
+    biThrNode *T = nullptr;
+    s.createThrTree(&p);
+    s.inOrderThrTree(&T,p);
+}
 
+void testHfTree()
+{
+    hfTree s;
+    s.createHfTree();
+}
+void testt()
+{
+    //testHfTree();
+    hfTreeNode node1,node2,node3;
+    //调用拷贝构造函数
+    node1.lchild = &node2;
+    node1.rchild = &node3;
+
+    hfTreeNode node4(node1);
+}
 using std::cin;
 using std::cout;
 using std::endl;
@@ -26,7 +52,7 @@ const static int num = 16;
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc,argv);
-
+    testHfTree();
     return a.exec();
 }
 
@@ -413,6 +439,7 @@ void controlPlatform()
 void treeTest()
 {
     tree t(20);
+    tree s;
     t.addTreeNode(0,30);
     t.addTreeNode(0,40);
     t.addTreeNode(0,50);
@@ -430,4 +457,8 @@ void treeTest()
     t.getParent(70);
     t.getParent(80);
     t.getParent(90);
+
+    s = t;
+    s.printTree();
+    s.findChildren(40);
 }

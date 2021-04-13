@@ -92,7 +92,7 @@ public:
 
     }
 
-    void createHfTree();
+    hfTreeNode *createHfTree();
 
 
 private:
