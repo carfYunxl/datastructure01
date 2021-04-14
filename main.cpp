@@ -9,6 +9,8 @@
 #include "hftree.h"
 #include <QVector>
 #include <algorithm>
+#include <ctime>
+
 void testFunc_1();
 void testFunc_2();
 void testFunc_3();
@@ -31,8 +33,23 @@ void testBiThrTree()
 
 void testHfTree()
 {
+    string str = "this is my first time to learn huffman tree,"
+                 "i think it is very interisting!";
+    string str1 = "11000010001010000010010111000010011";
+
+    cout << "the Huffman code you enter is : "<< endl << str1 << endl;
     hfTree s;
-    s.createHfTree();
+    hfTreeNode *root = nullptr;
+    //创建哈夫曼树
+    root = s.createHfTree(root,str);
+    //创建哈夫曼编码
+    s.getHfCode(root);
+    //编码显示
+    s.enCode();
+    //解码
+    cout << "what you want to say is :" << endl;
+    s.deCode(root,str1);
+    cout << endl;
 }
 void testt()
 {
@@ -52,7 +69,15 @@ const static int num = 16;
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc,argv);
+    clock_t start_time,end_time;//计时开始
+    start_time = clock();
+
     testHfTree();
+
+    end_time = clock();//计时结束
+    //输出运行时间
+    cout << "function run time = " << 1000*(double)(end_time - start_time) /  CLOCKS_PER_SEC << "ms" << endl;
+    cout << "system run time = " << 1000 * (double)clock() / CLOCKS_PER_SEC << "ms" << endl;
     return a.exec();
 }
 

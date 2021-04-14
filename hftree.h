@@ -1,9 +1,10 @@
 ﻿#ifndef HFTREE_H
 #define HFTREE_H
 #include <iostream>
+#include <string>
+#include <QVector>
 //typedef int ELEMTYPE;
-using std::cout;
-using std::endl;
+using namespace std;
 class hfTreeNode
 {
 public:
@@ -11,6 +12,9 @@ public:
     hfTreeNode(){
         lchild = nullptr;
         rchild = nullptr;
+        parent = nullptr;
+        hfcode = "";
+
     }
     //拷贝构造函数
     hfTreeNode(const hfTreeNode& t)
@@ -25,8 +29,8 @@ public:
     }
     //默认析构函数
     ~hfTreeNode(){
-        //delete lchild;
-        //delete rchild;
+        delete lchild;
+        delete rchild;
 
     }
     bool operator<(hfTreeNode& h){
@@ -81,22 +85,32 @@ public:
     int weight;//数据域,存储权重
     hfTreeNode *lchild;//左孩子指针域
     hfTreeNode *rchild;//右孩子指针域
+    hfTreeNode *parent;
+    string hfcode;
+    char tag;
 };
 class hfTree
 {
 public:
     hfTree(){
-
+        //root = nullptr;
     }
     ~hfTree(){
-
     }
 
-    hfTreeNode *createHfTree();
+    hfTreeNode *createHfTree(hfTreeNode *p,string str);
+    void preOrderHfTree(hfTreeNode **p,string s);
+    void getHfCode(hfTreeNode *p);
+
+    void enCode();//显示哈夫曼编码
+    void deCode(hfTreeNode *root,
 
 
+                string str);//解码
 private:
     //void hfTreeInitialize();
+    //hfTreeNode *root;
+    QVector<hfTreeNode *> finalHfTreeNode;
 };
 
 #endif // HFTREE_H
